@@ -45,7 +45,6 @@ module.exports = function (app) {
     .get(function(req, res) {
       var bundle = req.query;
       var result;
-
       function isLiked() {
         if (bundle.hasOwnProperty('like')) {
           return bundle.like == 'true' ? true : false;
@@ -54,14 +53,12 @@ module.exports = function (app) {
       }
 
       if (Array.isArray(bundle.stock) && bundle.stock.length === 2) {
-        console.log("second form")
-        console.log(bundle)
-
+        handle = new Handle(res, bundle);
+        handle.doublePrice();
       }
       else {
         handle = new Handle(res, bundle);
         handle.singlePrice();
-
       }
     });
 };
